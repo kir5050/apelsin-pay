@@ -460,12 +460,22 @@ input{font:inherit;border:none;outline:none;background:none;color:inherit}
 @keyframes slidein{from{transform:translateX(100%)}to{transform:none}}
 @keyframes slideout{from{transform:none}to{transform:translateX(100%)}}
 .slidex{animation:up .26s ease}
+/* liquid animated header (drinkit-style) */
+.liquid-wrap{position:relative;overflow:hidden;color:#fff;background:linear-gradient(160deg,#FF961C 0%,#FA8200 52%,#EE6B06 100%)}
+.lwbg{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.lw1,.lw2{position:absolute;left:-50%;top:-50%;width:200%;height:200%;transform-origin:center;will-change:transform}
+.lw1{background:conic-gradient(from 0deg at 42% 40%,#FFC062,#F5760E,#E25F08,#FF9A2E,#FFD98A,#F5760E,#E8650A,#FFC062);filter:blur(38px);animation:spincw 15s linear infinite}
+.lw2{background:conic-gradient(from 90deg at 60% 62%,#FFB347,#EE6B06,#FFCB75,#E25F08,#FF9A2E,#EE6B06,#FFB347);filter:blur(46px);mix-blend-mode:overlay;opacity:.9;animation:spinccw 21s linear infinite}
+.lw3{position:absolute;inset:-30%;background:radial-gradient(38% 46% at 28% 30%,rgba(255,236,170,.95),transparent 60%),radial-gradient(42% 50% at 76% 64%,rgba(255,128,0,.72),transparent 62%),radial-gradient(40% 46% at 52% 86%,rgba(255,214,130,.82),transparent 60%);filter:blur(26px);mix-blend-mode:screen;will-change:transform;animation:drift3 12s ease-in-out infinite}
+.liquid-top{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(140,58,0,.22),rgba(140,58,0,0) 26%)}
+@keyframes spincw{to{transform:rotate(360deg)}}
+@keyframes spinccw{to{transform:rotate(-360deg)}}
+@keyframes drift3{0%,100%{transform:translate(-5%,-4%) scale(1.06)}50%{transform:translate(6%,4%) scale(1.16)}}
 @media (max-width:720px){
   body{background:#FA8200}.stage{padding:0;gap:0}.cap{display:none}
   .device{width:100vw;height:100dvh;max-height:none;border-radius:0;padding:0;box-shadow:none}
   .device::before,.device::after,.r-btn{display:none}.screen{border-radius:0}.island{top:9px}
 }
-@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms !important}}
 </style>
 </head>
 <body>
@@ -1867,6 +1877,20 @@ const HomeFr = () => /*#__PURE__*/React.createElement("div", {
   s: 17,
   c: "#fff"
 }), "Рекомендовать"));
+const SILK_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" viewBox="0 0 400 640"><defs><linearGradient id="og" x1="0%" y1="0%" x2="78%" y2="100%"><stop offset="0%" stop-color="#FFB347"/><stop offset="46%" stop-color="#FB8400"/><stop offset="100%" stop-color="#E25F08"/></linearGradient><filter id="silk" x="-15%" y="-15%" width="130%" height="130%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.006 0.012" numOctaves="2" seed="7" stitchTiles="stitch" result="t"/><feDiffuseLighting in="t" surfaceScale="4.5" diffuseConstant="1.2" lighting-color="#ffffff" result="d"><feDistantLight azimuth="235" elevation="46"/></feDiffuseLighting><feComposite in="d" in2="SourceGraphic" operator="arithmetic" k1="1.08" k2="0" k3="0" k4="0" result="f"/><feSpecularLighting in="t" surfaceScale="4.5" specularConstant="0.62" specularExponent="16" lighting-color="#FFE6A0" result="s"><feDistantLight azimuth="235" elevation="58"/></feSpecularLighting><feComposite in="s" in2="f" operator="arithmetic" k1="0" k2="1" k3="0.9" k4="0" result="l"/><feGaussianBlur in="l" stdDeviation="0.35"/></filter></defs><rect width="400" height="640" fill="url(#og)" filter="url(#silk)"/></svg>`;
+const SilkBg = () => /*#__PURE__*/React.createElement("div", {
+  className: "silk",
+  dangerouslySetInnerHTML: {
+    __html: SILK_SVG
+  }
+});
+const SILK_SVG2 = `<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" viewBox="0 0 400 640"><defs><linearGradient id="og2" x1="0%" y1="0%" x2="80%" y2="100%"><stop offset="0%" stop-color="#FFC062"/><stop offset="50%" stop-color="#FB8400"/><stop offset="100%" stop-color="#DD5A06"/></linearGradient><filter id="silk2f" x="-15%" y="-15%" width="130%" height="130%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.008 0.014" numOctaves="2" seed="23" stitchTiles="stitch" result="t"/><feDiffuseLighting in="t" surfaceScale="5" diffuseConstant="1.25" lighting-color="#ffffff" result="d"><feDistantLight azimuth="120" elevation="44"/></feDiffuseLighting><feComposite in="d" in2="SourceGraphic" operator="arithmetic" k1="1.1" k2="0" k3="0" k4="0" result="f"/><feSpecularLighting in="t" surfaceScale="5" specularConstant="0.7" specularExponent="14" lighting-color="#FFEFC0" result="s"><feDistantLight azimuth="120" elevation="56"/></feSpecularLighting><feComposite in="s" in2="f" operator="arithmetic" k1="0" k2="1" k3="0.9" k4="0" result="l"/><feGaussianBlur in="l" stdDeviation="0.3"/></filter></defs><rect width="400" height="640" fill="url(#og2)" filter="url(#silk2f)"/></svg>`;
+const SilkBg2 = () => /*#__PURE__*/React.createElement("div", {
+  className: "silk2",
+  dangerouslySetInnerHTML: {
+    __html: SILK_SVG2
+  }
+});
 const Home = ({
   nav,
   onProfile,
@@ -1875,21 +1899,41 @@ const Home = ({
   const [sub, setSub] = useState('all');
   return /*#__PURE__*/React.createElement("div", {
     className: "flow"
-  }, /*#__PURE__*/React.createElement(Hdr, {
-    title: "Карта Апельсин",
-    onProfile: onProfile,
-    onClose: () => nav('host')
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "liquid-wrap"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "lwbg"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "lw1"
   }), /*#__PURE__*/React.createElement("div", {
-    className: "hdr",
+    className: "lw2"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "lw3"
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "liquid-top"
+  }), /*#__PURE__*/React.createElement("div", {
     style: {
-      paddingBottom: 0,
-      borderRadius: 0
+      position: 'relative',
+      zIndex: 2
     }
-  }, /*#__PURE__*/React.createElement(Products, {
+  }, /*#__PURE__*/React.createElement(StatusBar, {
+    light: true
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "hdr-bar"
+  }, /*#__PURE__*/React.createElement(Avatar, {
+    onClick: onProfile
+  }), /*#__PURE__*/React.createElement("h1", null, "Карта Апельсин"), /*#__PURE__*/React.createElement("button", {
+    className: "hbtn",
+    onClick: () => nav('host'),
+    "aria-label": "Закрыть"
+  }, /*#__PURE__*/React.createElement(Icon, {
+    n: "x",
+    s: 18
+  }))), /*#__PURE__*/React.createElement(Products, {
     onCard: () => nav('card'),
     onSavings: () => nav('savings'),
     onTopup: onTopup
-  })), /*#__PURE__*/React.createElement("div", {
+  }))), /*#__PURE__*/React.createElement("div", {
     className: "sheet",
     style: {
       display: 'flex',
